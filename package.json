@@ -1,0 +1,22 @@
+{
+  "name": "tinyurls",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "win-build": "pkg -t node16-win index.js -o dist/win",
+    "mac-build": "pkg  -t node16-macos index.js -o dist/mac",
+    "linux-build": "pkg -t node16-linux index.js -o dist/linux",
+    "test": "nodemon  idnex.js -e js,ejs,json,html,css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "ejs": "^3.1.7",
+    "express": "^4.17.3",
+    "mongoose": "^6.3.0"
+  }
+}
