@@ -1,4 +1,2 @@
 node_modules
-env.json
-*.exe
-dist/
+.env

@@ -1,1 +1,6 @@
-That extension <code><%= extension %></code>  already exists, try making a newer one.
+<%- include('partials/header', { title: 'Name taken' }) %>
+        <p class="label error">Name taken</p>
+        <h1>That name is already in use</h1>
+        <p class="lead"><code><%= extension %></code> already points somewhere else. Try a different name.</p>
+        <a class="button" href="/">Try another name</a>
+<%- include('partials/footer') %>

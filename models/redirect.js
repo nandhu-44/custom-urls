@@ -1,8 +1,8 @@
 const { Schema, model } = require('mongoose');
 
 const Sc = new Schema({
-    Extension: String,
-    Url: String
+    Extension: { type: String, required: true, unique: true },
+    Url: { type: String, required: true }
 })
 
 module.exports = model("redirectmodel", Sc)

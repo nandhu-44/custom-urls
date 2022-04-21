@@ -1,1 +1,52 @@
-Your extension <code><%= extension %></code> have been saved for the url <%= url %> 
+<%- include('partials/header', { title: 'Link created' }) %>
+        <p class="label success">Saved</p>
+        <h1>Your link is ready</h1>
+        <p class="lead">Anyone who opens it will be sent to your URL.</p>
+
+        <p class="field-label">Short link</p>
+        <div class="result">
+            <a class="short-link" id="short-link" href="<%= shortUrl %>">/r/<%= extension %></a>
+            <button class="button" type="button" command="--copy" commandfor="short-link">Copy</button>
+        </div>
+        <p class="copy-status" id="copy-status" role="status"></p>
+        <p class="destination">Redirects to <a href="<%= url %>"><%= url %></a></p>
+
+        <a class="button outline" href="/">Create another</a>
+
+        <script>
+            const copyStatus = document.getElementById('copy-status');
+            let copyTimer;
+            let lastMessage = '';
+
+            async function copy(target) {
+                let ok = true;
+                try {
+                    await navigator.clipboard.writeText(target.href);
+                } catch {
+                    ok = false;
+                }
+                let message = ok ? 'Copied to clipboard.' : 'Couldn\'t copy. Select the link and copy it manually.';
+                // VoiceOver skips a message identical to the last one.
+                if (message === lastMessage) message += ' ';
+                lastMessage = message;
+
+                clearTimeout(copyTimer);
+                copyStatus.textContent = '';
+                copyStatus.classList.toggle('failed', !ok);
+                requestAnimationFrame(() => { copyStatus.textContent = message; });
+                copyTimer = setTimeout(() => { copyStatus.textContent = ''; }, 2500);
+            }
+
+            if ('CommandEvent' in window) {
+                document.addEventListener('command', (event) => {
+                    if (event.command === '--copy') copy(event.target);
+                }, true);
+            } else {
+                document.addEventListener('click', (event) => {
+                    const button = event.target.closest('button[command="--copy"]');
+                    const target = button && document.getElementById(button.getAttribute('commandfor'));
+                    if (target) copy(target);
+                });
+            }
+        </script>
+<%- include('partials/footer') %>

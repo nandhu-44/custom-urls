@@ -1,43 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('partials/header') %>
+        <h1>Create a custom link</h1>
+        <p class="lead">Pick a name and the URL it should point to.</p>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Urls</title>
-</head>
-
-<body>
-    <div id="root">
-        <noscript>Please enable Javascript to continue.</noscript>
         <form action="/save" method="post">
-            <div id="extension">
-                <input type="text" name="extension" id="extension_" placeholder="extension">
+            <div class="field">
+                <label for="url">Destination URL</label>
+                <div class="input">
+                    <input type="url" name="url" id="url" placeholder="https://example.com/some/long/path" required
+                        autocorrect="off" autocapitalize="none" spellcheck="false" enterkeyhint="next">
+                </div>
             </div>
-            <div id="url">
-                <input type="url" name="url" id="url_" placeholder="url">
+            <div class="field">
+                <label for="extension">Name</label>
+                <div class="input">
+                    <span class="prefix">/r/</span>
+                    <input type="text" name="extension" id="extension" placeholder="my-link" pattern="[A-Za-z0-9_\-]+" required
+                        aria-describedby="extension-hint" autocorrect="off" autocapitalize="none" spellcheck="false" enterkeyhint="done">
+                </div>
+                <p class="hint" id="extension-hint">Letters, numbers, "-" and "_".</p>
             </div>
-            <br>
-            <div id="submit">
-                <input type="submit" value="Submit">
-            </div>
+            <button class="button" type="submit">Create link</button>
         </form>
-    </div>
-    <style>
-        /* Center the div with id root */
-        #root {
-            margin: 0 auto;
-            width: 50%;
-            text-align: center;
-        }
-        body {
-            background-color: #fafafa;
-            padding-top: 1rem;
-            text-align: center;
-        }
-        
-    </style>
-</body>
 
-</html>
+        <script>
+            const extension = document.getElementById('extension');
+            extension.addEventListener('invalid', () => {
+                if (extension.validity.patternMismatch) {
+                    extension.setCustomValidity('Use only letters, numbers, "-" and "_" (no spaces).');
+                }
+            });
+            extension.addEventListener('input', () => extension.setCustomValidity(''));
+        </script>
+<%- include('partials/footer') %>

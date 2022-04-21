@@ -1,20 +1,39 @@
 {
-  "name": "tinyurls",
+  "name": "custom-urls",
   "version": "1.0.0",
-  "description": "",
+  "description": "A small URL shortener where you pick the name: Express, EJS and MongoDB.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "win-build": "pkg -t node16-win index.js -o dist/win",
-    "mac-build": "pkg  -t node16-macos index.js -o dist/mac",
-    "linux-build": "pkg -t node16-linux index.js -o dist/linux",
-    "test": "nodemon  idnex.js -e js,ejs,json,html,css"
+    "dev": "node --watch index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "url-shortener",
+    "short-links",
+    "custom-urls",
+    "redirect",
+    "express",
+    "ejs",
+    "mongodb",
+    "mongoose",
+    "nodejs"
+  ],
+  "author": "nandhu-44 (https://github.com/nandhu-44)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nandhu-44/custom-urls.git"
+  },
+  "homepage": "https://custom-urls-nandhu.vercel.app",
+  "bugs": {
+    "url": "https://github.com/nandhu-44/custom-urls/issues"
+  },
+  "engines": {
+    "node": ">=18.11"
+  },
   "dependencies": {
     "body-parser": "^1.20.0",
+    "dotenv": "^16.6.1",
     "ejs": "^3.1.7",
     "express": "^4.17.3",
     "mongoose": "^6.3.0"
